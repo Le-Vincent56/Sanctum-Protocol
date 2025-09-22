@@ -1,5 +1,4 @@
 ﻿import {Line, makeScene2D, Rect, Txt} from "@motion-canvas/2d";
-import {Spline} from '@motion-canvas/2d/lib/components';
 import {
     all,
     beginSlide,
@@ -23,15 +22,6 @@ export default makeScene2D(function* (view) {
     const LIGHT = useScene().variables.get('light', '#eeeeee');
     const VERDIGRIS = useScene().variables.get('verdigris', '#43b3ae');
     const PINK = useScene().variables.get('pink', '#ec008c');
-
-    const headerProps = {
-        fontFamily: 'Bokor',
-        fontStyle: 'normal',
-        fontSize: 150,
-        leftEdgeColor: VERDIGRIS,
-        rightEdgeColor: PINK,
-        edgeOffset: 2
-    }
 
     const bodyText = {
         fontFamily: 'Geo',
@@ -77,14 +67,14 @@ export default makeScene2D(function* (view) {
     view.add(
         <Rect ref={wrapper} width={'100%'} height={'100%'}>
             <Rect width={'100%'} height={'100%'} fill={DARK}/>
-            <Rect ref={makeRef(systems, 0)} {...outlineBox} y={-350} x={-750}>
+            <Rect ref={makeRef(systems, 0)} {...outlineBox} width={110} y={-350} x={-750}>
                 <Txt text={'Card UI'} {...bodyText}/>
             </Rect>
-            <Rect ref={makeRef(systems, 1)} {...outlineBox} y={-350} x={-550}>
-                <Txt text={'Input'} {...bodyText}/>
-            </Rect>
-            <Rect ref={makeRef(systems, 2)} {...outlineBox} width={230} y={-350} x={-300}>
+            <Rect ref={makeRef(systems, 1)} {...outlineBox} width={230} y={-350} x={-550}>
                 <Txt text={'Command Router'} {...bodyText}/>
+            </Rect>
+            <Rect ref={makeRef(systems, 2)} {...outlineBox} width={210} y={-350} x={-300}>
+                <Txt text={'Command Sink'} {...bodyText}/>
             </Rect>
             <Rect ref={makeRef(systems, 3)} {...outlineBox} width={210} y={-350} x={-30}>
                 <Txt text={'Battle Director'} {...bodyText}/>
@@ -98,14 +88,14 @@ export default makeScene2D(function* (view) {
             <Rect ref={makeRef(systems, 6)} {...outlineBox} width={190} y={-350} x={725}>
                 <Txt text={'UI/VFX/Audio'} {...bodyText}/>
             </Rect>
-            <Rect ref={makeRef(systems, 7)} {...outlineBox} y={350} x={-750}>
+            <Rect ref={makeRef(systems, 7)} {...outlineBox} width={110} y={350} x={-750}>
                 <Txt text={'Card UI'} {...bodyText}/>
             </Rect>
-            <Rect ref={makeRef(systems, 8)} {...outlineBox} y={350} x={-550}>
-                <Txt text={'Input'} {...bodyText}/>
-            </Rect>
-            <Rect ref={makeRef(systems, 9)} {...outlineBox} width={230} y={350} x={-300}>
+            <Rect ref={makeRef(systems, 8)} {...outlineBox} width={230} y={350} x={-550}>
                 <Txt text={'Command Router'} {...bodyText}/>
+            </Rect>
+            <Rect ref={makeRef(systems, 9)} {...outlineBox} width={210} y={350} x={-300}>
+                <Txt text={'Command Sink'} {...bodyText}/>
             </Rect>
             <Rect ref={makeRef(systems, 10)} {...outlineBox} width={210} y={350} x={-30}>
                 <Txt text={'Battle Director'} {...bodyText}/>

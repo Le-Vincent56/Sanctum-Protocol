@@ -10,15 +10,21 @@ import {
     useScene
 } from "@motion-canvas/core"
 import { EdgeStrokeTxt } from "../types/EdgeStrokeTxt";
+
+import prevBackground from '../img/art-background.jpg';
 import background from "../img/programming-background.jpg";
 
 export default makeScene2D(function* (view) {
     const wrapper = createRef<Rect>();
     const overlay = createRef<Rect>();
-    const header = createRef<EdgeStrokeTxt>();
+    const fromBackground = createRef<Img>();
+    const toBackground = createRef<Img>();
+    const topText = createRef<EdgeStrokeTxt>();
+    const bottomText = createRef<EdgeStrokeTxt>();
     const mainBoxes = createRef<Rect>();
     
     const layers: Rect[] = [];
+    const layerOutlines: Line[] = [];
     const layerNames: Txt[] = [];
     const simSubDiagrams: Rect[] = [];
     const adaptSubDiagrams: Rect[] = [];
@@ -49,10 +55,23 @@ export default makeScene2D(function* (view) {
     const headerProps = {
         fontFamily: 'Bokor',
         fontStyle: 'normal',
-        fontSize: 150,
+        fontSize: 200,
         leftEdgeColor: VERDIGRIS,
         rightEdgeColor: PINK,
         edgeOffset: 2
+    }
+    
+    const layerBox = {
+        width: 600,
+        height: 200,
+        fill: DARK,
+        opacity: 0,
+    }
+    
+    const outline = {
+        stroke: LIGHT,
+        lineWidth: 3,
+        end: 0,
     }
     
     const outlineBox = {
@@ -91,21 +110,46 @@ export default makeScene2D(function* (view) {
     
 
     view.add(
-        <Rect ref={wrapper} width={'100%'} height={'100%'} fill={DARK} >
-            <Img src={background}  rotation={-30} x={-100} opacity={0.4}/>
+        <Rect ref={wrapper} width={'100%'} height={'100%'} fill={DARK}>
+            <Img ref={fromBackground} src={prevBackground} rotation={-30} x={-100} scale={0.45}/>
+            <Img ref={toBackground} src={background} opacity={0}/>
             <Rect ref={overlay} width={'100%'} height={'100%'} fill={'#000000'} opacity={0.5}/>
-            <EdgeStrokeTxt ref={header} text={'Programming'} fill={'white'} {...headerProps}/>
+            <Rect width={'80%'} height={'40%'} y={-50}>
+                <EdgeStrokeTxt ref={topText} text={'Art'} fill={'white'} y={-100} {...headerProps}/>
+                <EdgeStrokeTxt ref={bottomText} text={'Shaders / VFX'} fill={'white'} y={100} {...headerProps}/>
+            </Rect>
 
             <Rect ref={mainBoxes} width={'100%'} height={'80%'} y={40} x={0}>
-                <Rect ref={makeRef(layers, 0)} {...outlineBox} y={-230}>
+                <Rect ref={makeRef(layers, 0)} {...layerBox} y={-230}>
                     <Txt ref={makeRef(layerNames, 0)} text={'Simulation'} {...bodyText}/>
                 </Rect>
-                <Rect ref={makeRef(layers, 1)} {...outlineBox} y={0}>
+                <Line ref={makeRef(layerOutlines, 0)} points={() => [
+                    layers[0].topLeft(),
+                    layers[0].topRight(),
+                    layers[0].bottomRight(),
+                    layers[0].bottomLeft(),
+                    layers[0].topLeft(),
+                ]} {...outline}/>
+                <Rect ref={makeRef(layers, 1)} {...layerBox} y={0}>
                     <Txt ref={makeRef(layerNames, 1)} text={'Adapter'} {...bodyText}/>
                 </Rect>
-                <Rect ref={makeRef(layers, 2)} {...outlineBox} y={230}>
+                <Line ref={makeRef(layerOutlines, 1)} points={() => [
+                    layers[1].topLeft(),
+                    layers[1].topRight(),
+                    layers[1].bottomRight(),
+                    layers[1].bottomLeft(),
+                    layers[1].topLeft(),
+                ]} {...outline}/>
+                <Rect ref={makeRef(layers, 2)} {...layerBox} y={230}>
                     <Txt ref={makeRef(layerNames, 2)} text={'Presentation'} {...bodyText}/>
                 </Rect>
+                <Line ref={makeRef(layerOutlines, 2)} points={() => [
+                    layers[2].topLeft(),
+                    layers[2].topRight(),
+                    layers[2].bottomRight(),
+                    layers[2].bottomLeft(),
+                    layers[2].topLeft(),
+                ]} {...outline}/>
             </Rect>
 
             <Rect width={'100%'} height={'100%'} x={0}>
@@ -204,26 +248,39 @@ export default makeScene2D(function* (view) {
         </Rect>
     )
     
-    yield* fadeTransition(1);
-    yield* beginSlide('introduction');
+    yield* all(
+        fromBackground().opacity(0, 1),
+        toBackground().opacity(1, 1),
+        topText().text('Programming', 1),
+        bottomText().text('Architecture', 1),
+    );
     yield* beginSlide('high-level');
     yield* all(
-        header().text('High Level', 1),
-        header().fontSize(130, 1),
-        header().y(-400, 1),
+        topText().opacity(0, 0.5),
+        topText().y(-550, 1),
+        bottomText().fontSize(150, 1),
+        bottomText().y(-350, 1),
         overlay().opacity(0.95, 1),
         overlay().fill(DARK, 1)
     );
 
     const generators = [];
     for(let i = 0; i < layers.length; i++) {
-        generators.push(all(layers[i].end(1, 1), layerNames[i].opacity(1, 1)));
+        generators.push(
+            chain(
+                layerOutlines[i].end(1, 1), 
+                all(
+                    layerNames[i].opacity(1, 1),
+                    layers[i].opacity(1, 1),
+                ),
+            )
+        );
     }
     yield* chain(...generators);
     
     yield* beginSlide('high-level details')
     yield* all(
-        header().opacity(0, 0.5),
+        bottomText().opacity(0, 0.5),
         mainBoxes().y(0, 1.5),
         layers[0].width(simExtendedWidth, 1.5),
         layers[0].height(simExtendedHeight, 1.5),
@@ -244,34 +301,34 @@ export default makeScene2D(function* (view) {
     
     yield* beginSlide('presentation details');
     yield* all(
-        layers[0].opacity(0.3, 0.75),
-        layers[1].opacity(0.3, 0.75),
+        layerOutlines[0].opacity(0.3, 0.75),
+        layerOutlines[1].opacity(0.3, 0.75),
         ...presentationSubDiagrams.map(text => text.opacity(1, 0.75)),
     )
     
     yield* beginSlide('adapter details');
     yield* all(
-        layers[0].opacity(0.3, 0.75),
-        layers[1].opacity(1, 0.75),
-        layers[2].opacity(0.3, 0.75),
+        layerOutlines[0].opacity(0.3, 0.75),
+        layerOutlines[1].opacity(1, 0.75),
+        layerOutlines[2].opacity(0.3, 0.75),
         ...adaptSubDiagrams.map(text => text.opacity(1, 0.75)),
         ...presentationSubDiagrams.map(text => text.opacity(0.3, 0.75)),
     )
 
     yield* beginSlide('simulation details');
     yield* all(
-        layers[0].opacity(1, 0.75),
-        layers[1].opacity(0.3, 0.75),
-        layers[2].opacity(0.3, 0.75),
+        layerOutlines[0].opacity(1, 0.75),
+        layerOutlines[1].opacity(0.3, 0.75),
+        layerOutlines[2].opacity(0.3, 0.75),
         ...simSubDiagrams.map(text => text.opacity(1, 0.75)),
         ...adaptSubDiagrams.map(text => text.opacity(0.3, 0.75)),
     );
     
     yield* beginSlide('presentation to adapter');
     yield* all(
-        layers[0].opacity(1, 0.75),
-        layers[1].opacity(1, 0.75),
-        layers[2].opacity(1, 0.75),
+        layerOutlines[0].opacity(1, 0.75),
+        layerOutlines[1].opacity(1, 0.75),
+        layerOutlines[2].opacity(1, 0.75),
         ...simSubDiagrams.map(text => text.opacity(1, 0.75)),
         ...adaptSubDiagrams.map(text => text.opacity(1, 0.75)),
         ...presentationSubDiagrams.map(text => text.opacity(1, 0.75)),

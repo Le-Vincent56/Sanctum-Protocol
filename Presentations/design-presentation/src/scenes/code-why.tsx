@@ -23,7 +23,7 @@ export default makeScene2D(function* (view) {
         fontSize: 150,
         leftEdgeColor: VERDIGRIS,
         rightEdgeColor: PINK,
-        edgeOffset: 2
+        edgeOffset: 2,
     }
     
     const bodyText = {
@@ -118,4 +118,5 @@ export default makeScene2D(function* (view) {
             effects[2].text("Safety and Scalability", segmentedTime),
         ),
     )
+    yield* beginSlide('end');
 });

@@ -18,7 +18,7 @@ export class EdgeStrokeTxt extends Txt {
     @signal()
     public declare readonly rightEdgeColor: SimpleSignal<PossibleColor, this>;
 
-    @initial(4)
+    @initial(6)
     @signal()
     public declare readonly edgeOffset: SimpleSignal<number, this>;
 
@@ -26,60 +26,36 @@ export class EdgeStrokeTxt extends Txt {
         super(props);
     }
 
-    protected override drawShape(context: CanvasRenderingContext2D) {
+    public override render(context: CanvasRenderingContext2D): void {
         const edgeOffset = this.edgeOffset();
 
-        // Store original fill value
-        const originalFill = this.fill();
-
-        // Draw left colored edge
-        this.fill(this.leftEdgeColor());
+        // Draw left edge
         context.save();
         context.translate(-edgeOffset, 0);
-        super.drawShape(context);
+        this.drawColoredText(context, this.leftEdgeColor());
         context.restore();
 
-        // Draw right colored edge
-        this.fill(this.rightEdgeColor());
+        // Draw right edge
         context.save();
         context.translate(edgeOffset, 0);
-        super.drawShape(context);
+        this.drawColoredText(context, this.rightEdgeColor());
         context.restore();
 
-        // Restore original fill and draw main text
+        // Draw main text on top
+        super.render(context);
+    }
+
+    private drawColoredText(context: CanvasRenderingContext2D, color: PossibleColor): void {
+        // Store the current fill
+        const originalFill = this.fill();
+
+        // Temporarily set the fill to our edge color
+        this.fill(color);
+
+        // Use the parent's render method to draw with all correct properties
+        super.render(context);
+
+        // Restore the original fill
         this.fill(originalFill);
-        super.drawShape(context);
     }
 }
-
-// Example usage in a scene:
-/*
-import {makeScene2D} from '@motion-canvas/2d/lib/scenes';
-import {createRef} from '@motion-canvas/core/lib/utils';
-import {EdgeStrokeTxt} from './EdgeStrokeTxt';
-
-export default makeScene2D(function* (view) {
-  const textRef = createRef<EdgeStrokeTxt>();
-  
-  view.add(
-    <EdgeStrokeTxt
-      ref={textRef}
-      text="EDGE"
-      fontSize={200}
-      fontWeight={900}
-      fill={'#ffffff'}           // White text
-      leftEdgeColor={'#00ffff'}  // Cyan left edge
-      rightEdgeColor={'#ff00ff'} // Magenta right edge
-      edgeOffset={6}              // Offset distance
-    />
-  );
-
-  // Animate the offset for a glitch effect
-  yield* textRef().edgeOffset(10, 0.5);
-  yield* textRef().edgeOffset(4, 0.5);
-  
-  // Or animate colors
-  yield* textRef().leftEdgeColor('#00ff00', 2);
-  yield* textRef().rightEdgeColor('#ffff00', 2);
-});
-*/
