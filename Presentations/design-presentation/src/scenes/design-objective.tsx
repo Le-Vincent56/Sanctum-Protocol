@@ -2,7 +2,7 @@
 import {all, beginSlide, createRef, makeRef, useScene, Vector2, createSignal} from "@motion-canvas/core"
 import { EdgeStrokeTxt } from "../types/EdgeStrokeTxt";
 
-import otherBackground from '../img/programming-background.jpg';
+import otherBackground from '../img/background.jpg';
 import background from '../img/art-background.jpg';
 
 export default makeScene2D(function* (view) {
@@ -82,8 +82,8 @@ export default makeScene2D(function* (view) {
             <Img ref={newBackground} src={background} rotation={-30} x={-100} opacity={0} scale={0.45}/>
             <Rect ref={backgroundOverlay} width={'100%'} height={'100%'} fill={VERY_DARK} opacity={0.4}/>
             <Rect width={'80%'} height={'40%'} y={-50}>
-                <EdgeStrokeTxt ref={topText} text={'Programming'} fill={'white'} y={-100} {...headerProps}/>
-                <EdgeStrokeTxt ref={bottomText} text={'Branching Model'} fill={'white'} y={100} {...headerProps}/>
+                <EdgeStrokeTxt ref={topText} text={'Sanctum //'} fill={'white'} y={-100} x={-100} {...headerProps}/>
+                <EdgeStrokeTxt ref={bottomText} text={'// Protocol'} fill={'white'} y={100} x={100} {...headerProps}/>
             </Rect>
 
             <Txt ref={objectiveText} {...bodyProps} textWrap={true} width={'60%'} textAlign={'center'} opacity={1}/>

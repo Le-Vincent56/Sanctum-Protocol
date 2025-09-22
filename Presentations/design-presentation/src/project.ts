@@ -5,6 +5,7 @@ import artStyleGuide from "./scenes/art-style-guide?scene";
 import artEnvironment from "./scenes/art-environment?scene";
 import artCharacter from "./scenes/art-character?scene";
 import artShaderVfx from "./scenes/art-shader-vfx?scene";
+import artUI from "./scenes/art-ui?scene";
 import codeHighLevel from "./scenes/code-high-level?scene";
 import codeUnityExample from "./scenes/code-unity-example?scene"
 import codeWhy from "./scenes/code-why?scene";
@@ -15,6 +16,8 @@ import designNetwork from './scenes/design-network?scene';
 import designNodes from './scenes/design-nodes?scene';
 import designBattle from './scenes/design-battle?scene';
 import uiBattle from './scenes/ui-battle?scene';
+import uiUserFlow from './scenes/ui-user-flow?scene';
+import uiAccessibility from './scenes/ui-accessibility?scene';
 
 import './globals.css';
 
@@ -22,8 +25,8 @@ export default makeProject({
   scenes: [
       introduction,
       designObjective, designGameLoop, designNetwork, designNodes, designBattle,
-      uiBattle,
-      artStyleGuide, artEnvironment, artCharacter, artShaderVfx,
+      uiBattle, uiUserFlow, uiAccessibility,
+      artStyleGuide, artEnvironment, artCharacter, artShaderVfx, artUI,
       codeHighLevel, codeUnityExample, codeWhy, codeBranchingModel,
   ],
   variables: {

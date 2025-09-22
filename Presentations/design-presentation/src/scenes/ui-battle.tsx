@@ -132,11 +132,13 @@ export default makeScene2D(function* (view) {
     );
 
     yield* beginSlide('end');
+    yield* steps[8].opacity(0, 1);
 
     yield* all(
         topText().y(-100, 1),
         bottomText().y(100, 1),
         topText().opacity(1, 1),
+        bottomText().opacity(1, 1),
         bottomText().fontSize(200, 1),
     );
 });

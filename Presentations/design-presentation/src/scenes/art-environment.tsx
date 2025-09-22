@@ -64,8 +64,8 @@ export default makeScene2D(function* (view) {
             <Img src={background} rotation={-30} x={-100} scale={0.45}/>
             <Rect ref={backgroundOverlay} width={'100%'} height={'100%'} fill={VERY_DARK} opacity={0.4}/>
             <Rect width={'80%'} height={'40%'} y={-50}>
-                <EdgeStrokeTxt ref={topText} text={'Art'} fill={'white'} y={-100} {...headerProps}/>
-                <EdgeStrokeTxt ref={bottomText} text={'Style Guide'} fill={'white'} y={100} {...headerProps}/>
+                <EdgeStrokeTxt ref={topText} text={'Art'} fill={'white'} y={-100} {...headerProps} opacity={1}/>
+                <EdgeStrokeTxt ref={bottomText} text={'Style Guide'} fill={'white'} y={100} {...headerProps} opacity={1}/>
             </Rect>
             
             <Img ref={structureImg} src={structure} size={[374, 300]} opacity={0} x={-373} y={-100}/>
@@ -178,10 +178,6 @@ export default makeScene2D(function* (view) {
         </Rect>
     )
     
-    yield* all(
-        topText().opacity(1, 1),
-        bottomText().opacity(1, 1),
-    )
     yield* bottomText().text('Environment', 1);
     yield* beginSlide('environment');
     

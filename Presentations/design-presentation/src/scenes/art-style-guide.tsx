@@ -2,13 +2,11 @@
 import { all, chain, beginSlide, createRef, makeRef, useScene} from "@motion-canvas/core"
 import { EdgeStrokeTxt } from "../types/EdgeStrokeTxt";
 
-import otherBackground from '../img/background.jpg';
 import background from '../img/art-background.jpg';
 
 export default makeScene2D(function* (view) {
     const wrapper = createRef<Rect>();
     const backgroundOverlay = createRef<Rect>();
-    const prevBackground = createRef<Img>();
     const newBackground = createRef<Img>();
     const topText = createRef<EdgeStrokeTxt>();
     const bottomText = createRef<EdgeStrokeTxt>();
@@ -54,12 +52,11 @@ export default makeScene2D(function* (view) {
 
     view.add(
         <Rect ref={wrapper} width={'100%'} height={'100%'} fill={DARK} >
-            <Img ref={prevBackground} src={otherBackground} rotation={-30} x={-100} opacity={0.4}/>
-            <Img ref={newBackground} src={background} rotation={-30} x={-100} opacity={0} scale={0.45}/>
+            <Img ref={newBackground} src={background} rotation={-30} x={-100} opacity={1} scale={0.45}/>
             <Rect ref={backgroundOverlay} width={'100%'} height={'100%'} fill={VERY_DARK} opacity={0.4}/>
             <Rect width={'80%'} height={'40%'} y={-50}>
-                <EdgeStrokeTxt ref={topText} text={'Sanctum //'} fill={'white'} y={-100} x={-100} {...headerProps}/>
-                <EdgeStrokeTxt ref={bottomText} text={'// Protocol'} fill={'white'} y={100} x={100} {...headerProps}/>
+                <EdgeStrokeTxt ref={topText} text={'UI'} fill={'white'} y={-100} {...headerProps}/>
+                <EdgeStrokeTxt ref={bottomText} text={'Accessibility'} fill={'white'} y={100} {...headerProps}/>
             </Rect>
 
             {/* Lower triangle fill */}
@@ -159,18 +156,16 @@ export default makeScene2D(function* (view) {
     lowerText().absolutePosition(wrapper().absolutePosition());
     
     yield* all(
-        prevBackground().opacity(0, 1),
-        newBackground().opacity(1, 1),
         topText().text('Art', 1),
-        topText().x(0, 1),
         bottomText().text('Style Guide', 1),
-        bottomText().x(0, 1),
     );
     
     yield* beginSlide('art-style-guide');
     yield* all(
         topText().opacity(0, 1),
+        topText().y(-600, 1),
         bottomText().opacity(0, 1),
+        bottomText().y(-400, 1),
         separator().end(1, 1),
     )
     yield* all(
@@ -210,5 +205,13 @@ export default makeScene2D(function* (view) {
         enemyText().opacity(0, 1),
         ...priestCharacteristics.map(text => text.opacity(0, 1)),
         ...enemyCharacteristics.map(text => text.opacity(0, 1)),
+    )
+    
+    yield* all(
+        topText().opacity(1, 1),
+        topText().y(-100, 1),
+        bottomText().opacity(1, 1),
+        bottomText().fontSize(200, 1),
+        bottomText().y(100 , 1),
     )
 }) 

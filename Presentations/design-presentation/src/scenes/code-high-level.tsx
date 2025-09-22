@@ -5,7 +5,6 @@ import {
     chain,
     createRef, delay,
     easeInExpo, easeOutExpo,
-    fadeTransition,
     makeRef,
     useScene
 } from "@motion-canvas/core"
@@ -116,7 +115,7 @@ export default makeScene2D(function* (view) {
             <Rect ref={overlay} width={'100%'} height={'100%'} fill={'#000000'} opacity={0.5}/>
             <Rect width={'80%'} height={'40%'} y={-50}>
                 <EdgeStrokeTxt ref={topText} text={'Art'} fill={'white'} y={-100} {...headerProps}/>
-                <EdgeStrokeTxt ref={bottomText} text={'Shaders / VFX'} fill={'white'} y={100} {...headerProps}/>
+                <EdgeStrokeTxt ref={bottomText} text={'UI'} fill={'white'} y={100} {...headerProps}/>
             </Rect>
 
             <Rect ref={mainBoxes} width={'100%'} height={'80%'} y={40} x={0}>
