@@ -219,36 +219,22 @@ export default makeScene2D(function* (view) {
         bottomText().y(-300, 1),
         bottomText().fontSize(150, 1),
     )
-
-    yield* beginSlide('robot');
     yield* all(
         robotFrame().end(1, 1),
         delay(
             0.25,
             robotImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('monk');
-    yield* all(
+        ),
         monkFrame().end(1, 1),
         delay(
             0.25,
             monkImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('tyranid');
-    yield* all(
+        ),
         tyranidFrame().end(1, 1),
         delay(
             0.25,
             tyranidImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('hyperion');
-    yield* all(
+        ),
         hyperionFrame().end(1, 1),
         delay(
             0.25,

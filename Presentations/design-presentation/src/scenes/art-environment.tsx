@@ -8,6 +8,7 @@ import structure from '../img/structure.png';
 import castle from '../img/castle.jpg';
 import hologram from '../img/hologram.png';
 import synthwave from '../img/synthwave.jpg';
+import brain from '../img/brain.jpg';
 import slayTheSpire from '../img/slay-the-spire.png';
 import conceptEnvironment from '../img/environment.png';
 
@@ -128,7 +129,7 @@ export default makeScene2D(function* (view) {
                 } {...frame} stroke={VERDIGRIS}
             />
 
-            <Img ref={brainImg} src={synthwave} size={[373, 210]}  opacity={0} x={560} y={315}/>
+            <Img ref={brainImg} src={brain} size={[373, 210]}  opacity={0} x={560} y={315}/>
             <Line ref={brainFrame} points={() =>
                     [
                         brainImg().topLeft(),
@@ -194,47 +195,27 @@ export default makeScene2D(function* (view) {
         delay(
             0.25,
             structureImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('castle');
-    yield* all(
+        ),
         castleFrame().end(1, 1),
         delay(
             0.25,
             castleImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('blueprint');
-    yield* all(
+        ),
         blueprintFrame().end(1, 1),
         delay(
             0.25,
             blueprintImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('hologram');
-    yield* all(
+        ),
         hologramFrame().end(1, 1),
         delay(
             0.25,
             hologramImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('synthwave');
-    yield* all(
+        ),
         synthwaveFrame().end(1, 1),
         delay(
             0.25,
             synthwaveImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('brain');
-    yield* all(
+        ),
         brainFrame().end(1, 1),
         delay(
             0.25,

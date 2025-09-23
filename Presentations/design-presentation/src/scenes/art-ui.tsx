@@ -164,89 +164,38 @@ export default makeScene2D(function* (view) {
         bottomText().text('UI', 1),
     );
 
-    yield* beginSlide('start');
-
-    yield* beginSlide('gothic');
+    yield* beginSlide('sci-fi');
     yield* all(
         topText().opacity(0, 0.5),
         topText().y(-500, 1),
         bottomText().y(-300, 1),
         bottomText().fontSize(130, 1),
-    );
-
-    yield* beginSlide('castlevania');
-    yield* all(
-        castlevaniaFrame().end(1, 1),
-        delay(
-            0.25,
-            castlevaniaImg().opacity(1, 1),
-        )
     )
 
-    yield* beginSlide('armelio');
-    yield* all(
-        armelioFrame().end(1, 1),
-        delay(
-            0.25,
-            armelioImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('kingdom');
-    yield* all(
-        kingdomFrame().end(1, 1),
-        delay(
-            0.25,
-            kingdomImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('sci-fi');
-    yield* all(
-        castlevaniaImg().opacity(0, 1),
-        castlevaniaFrame().start(1, 0.75),
-        armelioImg().opacity(0, 1),
-        armelioFrame().start(1, 0.75),
-        kingdomImg().opacity(0, 1),
-        kingdomFrame().start(1, 0.75),
-    )
-    
     yield* all(
         warhammerFrame().end(1, 1),
         delay(
             0.25,
             warhammerImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('cyberpunk');
-    yield* all(
+        ),
         cyberpunkFrame().end(1, 1),
         delay(
             0.25,
             cyberpunkImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('doom');
-    yield* all(
+        ),
         doomFrame().end(1, 1),
         delay(
             0.25,
             doomImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('destiny');
-    yield* all(
+        ),
         destinyFrame().end(1, 1),
         delay(
             0.25,
             destinyImg().opacity(1, 1),
-        )
+        ),
     )
-    
-    yield* beginSlide('end');
+
+    yield* beginSlide('gothic');
     yield* all(
         warhammerImg().opacity(0, 1),
         warhammerFrame().start(1, 0.75),
@@ -256,6 +205,34 @@ export default makeScene2D(function* (view) {
         doomFrame().start(1, 0.75),
         destinyImg().opacity(0, 1),
         destinyFrame().start(1, 0.75),
+    );
+
+    yield* all(
+        castlevaniaFrame().end(1, 1),
+        delay(
+            0.25,
+            castlevaniaImg().opacity(1, 1),
+        ),
+        armelioFrame().end(1, 1),
+        delay(
+            0.25,
+            armelioImg().opacity(1, 1),
+        ),
+        kingdomFrame().end(1, 1),
+        delay(
+            0.25,
+            kingdomImg().opacity(1, 1),
+        )
+    )
+    
+    yield* beginSlide('end');
+    yield* all(
+        castlevaniaImg().opacity(0, 1),
+        castlevaniaFrame().start(1, 0.75),
+        armelioImg().opacity(0, 1),
+        armelioFrame().start(1, 0.75),
+        kingdomImg().opacity(0, 1),
+        kingdomFrame().start(1, 0.75),
     )
     
     yield* all(

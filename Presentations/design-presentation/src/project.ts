@@ -18,6 +18,7 @@ import designBattle from './scenes/design-battle?scene';
 import uiBattle from './scenes/ui-battle?scene';
 import uiUserFlow from './scenes/ui-user-flow?scene';
 import uiAccessibility from './scenes/ui-accessibility?scene';
+import conclusion from './scenes/conclusion?scene';
 
 import './globals.css';
 
@@ -28,6 +29,7 @@ export default makeProject({
       uiBattle, uiUserFlow, uiAccessibility,
       artStyleGuide, artEnvironment, artCharacter, artShaderVfx, artUI,
       codeHighLevel, codeUnityExample, codeWhy, codeBranchingModel,
+      conclusion,
   ],
   variables: {
       dark: '#1c1c1c',

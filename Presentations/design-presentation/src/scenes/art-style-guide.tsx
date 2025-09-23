@@ -178,21 +178,19 @@ export default makeScene2D(function* (view) {
     )
     
     yield* beginSlide('order vs chaos');
-    yield* all(
-        priestCharacteristics[0].opacity(1, 1),
-        enemyCharacteristics[0].opacity(1, 1),
-    )
-    
-    yield* beginSlide('mechanical vs digital');
-    yield* all(
-        priestCharacteristics[1].opacity(1, 1),
-        enemyCharacteristics[1].opacity(1, 1),
-    )
-    
-    yield* beginSlide('geometric vs organic');
-    yield* all(
-        priestCharacteristics[2].opacity(1, 1),
-        enemyCharacteristics[2].opacity(1, 1),
+    yield* chain(
+        all(
+            priestCharacteristics[0].opacity(1, 1),
+            enemyCharacteristics[0].opacity(1, 1),
+        ),
+        all(
+            priestCharacteristics[1].opacity(1, 1),
+            enemyCharacteristics[1].opacity(1, 1),
+        ),
+        all(
+            priestCharacteristics[2].opacity(1, 1),
+            enemyCharacteristics[2].opacity(1, 1),
+        )
     )
     
     yield* beginSlide('end');

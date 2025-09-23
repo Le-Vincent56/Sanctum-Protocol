@@ -74,7 +74,7 @@ export default makeScene2D(function* (view) {
 
     view.add(
         <Rect ref={wrapper} width={'100%'} height={'100%'} fill={DARK}>
-            <Img ref={backgroundImg} src={background}  rotation={-30} x={-100} opacity={0.4}/>
+            <Img ref={backgroundImg} src={background} opacity={0.4}/>
             <Rect ref={overlay} width={'100%'} height={'100%'} fill={'#000000'} opacity={0.5}/>
             <Rect width={'80%'} height={'40%'} y={-50}>
                 <EdgeStrokeTxt ref={topText} text={'Programming'} fill={'white'} y={-100} {...headerProps}/>
@@ -386,5 +386,12 @@ export default makeScene2D(function* (view) {
         topText().fontSize(200, 1),
         bottomText().y(100, 1),
         bottomText().fontSize(200, 1),
+    )
+    
+    yield* all(
+        topText().opacity(0, 0.5),
+        topText().y(0, 1),
+        bottomText().opacity(0, 0.5),
+        bottomText().y(0, 1),
     )
 });

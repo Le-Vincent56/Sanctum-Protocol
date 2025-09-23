@@ -100,27 +100,18 @@ export default makeScene2D(function* (view) {
         bottomText().fontSize(150, 1),
     )
 
-    yield* beginSlide('inscryption');
+    euclideanGif().play();
     yield* all(
         inscryptionFrame().end(1, 1),
         delay(
             0.25,
             inscryptionImg().opacity(1, 1),
-        )
-    )
-
-    yield* beginSlide('foils');
-    yield* all(
+        ),
         foilsFrame().end(1, 1),
         delay(
             0.25,
             foilsImg().opacity(1, 1),
-        )
-    )
-    
-    yield* beginSlide('euclidean');
-    euclideanGif().play();
-    yield* all(
+        ),
         euclideanFrame().end(1, 1),
         delay(
             0.25,

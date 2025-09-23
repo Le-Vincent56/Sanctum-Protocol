@@ -1,4 +1,4 @@
-﻿import {makeScene2D, Rect, Img, Line} from "@motion-canvas/2d"
+﻿import {makeScene2D, Rect, Img, Line, Txt} from "@motion-canvas/2d"
 import {
     all,
     beginSlide,
@@ -23,8 +23,7 @@ export default makeScene2D(function* (view) {
     const bottomText = createRef<EdgeStrokeTxt>();
     
     const userFlowImg = createRef<Img>();
-    const userFlowFrame = createRef<Line>();
-
+    
     const VERY_DARK = '#000000';
     const DARK = useScene().variables.get('dark', '#1c1c1c');
     const VERDIGRIS = useScene().variables.get('verdigris', '#43b3ae');
@@ -41,20 +40,6 @@ export default makeScene2D(function* (view) {
         edgeOffset: 2
     }
 
-    const bodyProps = {
-        fontFamily: 'Geo',
-        fontWeight: 400,
-        fontSize: 80,
-        fill: LIGHT,
-        opacity: 0,
-    }
-
-    const frame = {
-        stroke: LIGHT,
-        lineWidth: 3,
-        end: 0,
-    }
-
     view.add(
         <Rect ref={wrapper} width={'100%'} height={'100%'} fill={DARK} >
             <Img ref={newBackground} src={background} rotation={-30} x={-100} opacity={0.4} scale={0.45}/>
@@ -64,17 +49,7 @@ export default makeScene2D(function* (view) {
                 <EdgeStrokeTxt ref={bottomText} text={'Battle'} fill={'white'} y={100} {...headerProps}/>
             </Rect>
             
-            <Img ref={userFlowImg} src={userFlow} scale={0.65} y={50} opacity={0}/>
-            <Line ref={userFlowFrame} points={() =>
-                    [
-                        userFlowImg().topLeft(),
-                        userFlowImg().topRight(),
-                        userFlowImg().bottomRight(),
-                        userFlowImg().bottomLeft(),
-                        userFlowImg().topLeft(),
-                    ]
-                } {...frame} stroke={VERDIGRIS}
-            />
+            <Img ref={userFlowImg} src={userFlow} size={[, 800]} y={80} opacity={0}/>
         </Rect>
     )
 
@@ -90,19 +65,10 @@ export default makeScene2D(function* (view) {
         bottomText().y(-375, 1),
     );
 
-    yield* all(
-        userFlowFrame().end(1, 1),
-        delay(
-            0.25,
-            userFlowImg().opacity(1, 1),
-        )
-    )
+    yield* userFlowImg().opacity(1, 1);
 
     yield* beginSlide('end');
-    yield* all(
-        userFlowImg().opacity(0, 1),
-        userFlowFrame().start(1, 0.75),
-    )
+    yield* userFlowImg().opacity(0, 1);
 
     yield* all(
         topText().y(-100, 1),
