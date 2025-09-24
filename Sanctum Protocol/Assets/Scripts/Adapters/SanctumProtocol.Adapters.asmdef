@@ -1,0 +1,16 @@
+{
+    "name": "SanctumProtocol.Adapters",
+    "rootNamespace": "SanctumProtocol",
+    "references": [
+        "GUID:6d59016b67b01024ebe9c053875ca64f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

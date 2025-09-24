@@ -1,0 +1,16 @@
+{
+    "name": "SanctumProtocol.Presentation",
+    "rootNamespace": "SanctumProtocol",
+    "references": [
+        "GUID:9fe2151721b28294dbd80e9d4732fb1e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
