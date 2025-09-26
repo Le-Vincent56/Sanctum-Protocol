@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SanctumProtocol.Simulation.Abstractions.Contracts;
 
-public interface ISimulation
+public interface  IGameCommandSink
 {
-        IReadOnlyList<IDomainEvent> Execute(IGameCommand command);
+    IReadOnlyList<IDomainEvent> Handle(IGameCommand command);
 }
