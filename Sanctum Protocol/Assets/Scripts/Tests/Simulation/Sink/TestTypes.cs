@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using SanctumProtocol.Simulation.Abstractions.Contracts;
 
-namespace SanctumProtocol.Tests.Adapters.Plumbing;
+namespace SanctumProtocol.Tests.Simulation.Sink;
 
 public class Foo : IGameCommand
 {
@@ -48,4 +48,20 @@ public sealed class BarHandler : ICommandHandler<Bar>
 public sealed class ThrowingHandler : ICommandHandler<Foo>
 {
     public IReadOnlyList<IDomainEvent> Handle(Foo c) => throw new InvalidOperationException("boom");
+}
+
+public interface IFoo : IGameCommand
+{
+    public string Message { get; set; }
+}
+
+public sealed class FooTwo : IFoo
+{
+    public string Message { get; set; }
+    public FooTwo(string message) => Message = message;
+}
+
+public sealed class FooTwoHandler : ICommandHandler<IFoo>
+{
+    public IReadOnlyList<IDomainEvent> Handle(IFoo command) => new IDomainEvent[] { new FooBar(command.Message) };
 }

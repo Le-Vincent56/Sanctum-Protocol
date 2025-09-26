@@ -2,9 +2,9 @@ using System;
 using NUnit.Framework;
 using SanctumProtocol.Simulation.Core;
 
-namespace SanctumProtocol.Tests.Adapters.Plumbing;
+namespace SanctumProtocol.Tests.Simulation.Sink;
 
-public sealed class CommandSinkExceptionBehavior_Tests
+public sealed class CommandSinkExceptionBehaviorTests
 {
     [Test]
     public void Handle_UnknownCommandType_ThrowsArgumentException()
