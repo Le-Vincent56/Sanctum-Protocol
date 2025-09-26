@@ -1,0 +1,1 @@
+{"AdditionalImports":[{"Path":"LangVersion.props","Position":0}],"AdditionalImportsAdditionalProjects":["Assembly-CSharp.csproj","SanctumProtocol.Adapters.csproj","SanctumProtocol.Adapters.Tests.csproj","SanctumProtocol.Simulation.csproj"],"EnableAddAnalyzerReferences":false,"AddAnalyzerReferencesAdditionalProjects":[]}
