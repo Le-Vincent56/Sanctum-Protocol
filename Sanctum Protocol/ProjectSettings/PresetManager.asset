@@ -4,4 +4,15 @@
 PresetManager:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_DefaultPresets: {}
+  m_DefaultPresets:
+  - first:
+      m_NativeTypeID: 1006
+      m_ManagedTypePPtr: {fileID: 0}
+      m_ManagedTypeFallback: 
+    second:
+    - m_Preset: {fileID: 2655988077585873504, guid: b839ff53ae4ebf64eb622b21799142f2, type: 2}
+      m_Filter: glob:"Sprites/*.png"
+      m_Disabled: 0
+    - m_Preset: {fileID: 2655988077585873504, guid: 5ae136a9d7a1ef9478bd34f2dc88e663, type: 2}
+      m_Filter: glob:"Textures/*.png"
+      m_Disabled: 0
